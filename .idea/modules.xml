@@ -3,6 +3,7 @@
   <component name="ProjectModuleManager">
     <modules>
       <module fileurl="file://$PROJECT_DIR$/.idea/d3-covid-react.iml" filepath="$PROJECT_DIR$/.idea/d3-covid-react.iml" />
+      <module fileurl="file://$PROJECT_DIR$/../react-d3-try/.idea/react-d3-try.iml" filepath="$PROJECT_DIR$/../react-d3-try/.idea/react-d3-try.iml" />
     </modules>
   </component>
 </project>
