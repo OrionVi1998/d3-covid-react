@@ -2,6 +2,8 @@ import './App.css';
 import TopHeader from "./Components/TopHeader";
 import {useEffect, useState} from "react";
 import {csv, group, max} from "d3"
+import {Segment} from "semantic-ui-react";
+import ChartWrapper from "./Components/ChartWrapper";
 
 function App() {
 
@@ -26,6 +28,9 @@ function App() {
         <div className="App">
             <TopHeader/>
 
+            <Segment>
+                <ChartWrapper data={data}/>
+            </Segment>
         </div>
     );
 }

@@ -18,7 +18,7 @@ const ChartWrapper = ({ data }) => {
 
 
     return (
-        <div className="chart-area" ref={chartArea}/>
+        <div className="pie-chart-area" ref={chartArea}/>
     )
 }
 
