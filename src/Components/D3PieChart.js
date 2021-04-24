@@ -38,7 +38,7 @@ class D3PieChart {
 
         let color = d3.scaleOrdinal()
             .domain(data.map(d => d.value))
-            .range(d3.quantize(t => d3.interpolateOranges(t * 0.8 + 0.1), data.length).reverse())
+            .range(d3.quantize(t => d3.interpolateSpectral(t * 0.8 + 0.1), data.length).reverse())
 
         let arc = d3.arc()
             .innerRadius(0)
