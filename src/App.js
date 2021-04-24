@@ -28,7 +28,7 @@ function App() {
         <div className="App">
             <TopHeader/>
 
-            <Segment>
+            <Segment compact margin>
                 <ChartWrapper data={data}/>
             </Segment>
         </div>
