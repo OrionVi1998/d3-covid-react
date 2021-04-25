@@ -1,7 +1,7 @@
 import React, {useRef, useState, useEffect} from 'react';
 import D3PieChart from './D3PieChart'
 
-const ChartWrapper = ({ data, setCountry }) => {
+const PieChartWrapper = ({ data, setCountry }) => {
     const chartArea = useRef(null)
     const [chart, setChart] = useState(null)
 
@@ -14,12 +14,11 @@ const ChartWrapper = ({ data, setCountry }) => {
             chart.update()
         }
 
-    }, [chart, data])
-
+    }, [chart, data, setCountry])
 
     return (
         <div className="pie-chart-area" ref={chartArea}/>
     )
 }
 
-export default ChartWrapper
+export default PieChartWrapper

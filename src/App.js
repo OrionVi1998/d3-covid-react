@@ -3,7 +3,8 @@ import TopHeader from "./Components/TopHeader";
 import {useEffect, useState} from "react";
 import {csv, group, max} from "d3"
 import {Segment} from "semantic-ui-react";
-import ChartWrapper from "./Components/ChartWrapper";
+import PieChartWrapper from "./Components/PieChartWrapper";
+import D3PieChart from "./Components/D3PieChart";
 
 function App() {
 
@@ -38,7 +39,7 @@ function App() {
                 {
                     data ?
                         <Segment compact>
-                            <ChartWrapper data={data} setCountry={setCountry}/>
+                            <PieChartWrapper data={data} setCountry={setCountry}/>
                         </Segment>
                         :
                         <Segment vertical loading>
