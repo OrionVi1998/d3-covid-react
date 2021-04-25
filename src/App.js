@@ -9,7 +9,7 @@ import D3PieChart from "./Components/D3PieChart";
 function App() {
 
     const [data, setData] = useState(null)
-    const [country, setCountry] = useState(null)
+    const [countryData, setCountryData] = useState({name:"---",value:"---"})
 
     useEffect(() => {
         csv("https://covid.ourworldindata.org/data/owid-covid-data.csv")
@@ -39,7 +39,7 @@ function App() {
                 {
                     data ?
                         <Segment compact>
-                            <PieChartWrapper data={data} setCountry={setCountry}/>
+                            <PieChartWrapper data={data} setCountryData={setCountryData}/>
                         </Segment>
                         :
                         <Segment vertical loading>
@@ -48,7 +48,7 @@ function App() {
                             }/>
                         </Segment>
                 }
-                {country}
+                {`Country: ${countryData.name}, Cases/million: ${countryData.value}`}
             </Segment.Group>
 
         </div>

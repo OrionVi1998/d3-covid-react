@@ -16,7 +16,7 @@ const radius = Math.min(WIDTH, HEIGHT) / 2 - 50
 
 class D3PieChart {
 
-    constructor(element, data, setCountry) {
+    constructor(element, data, setCountryData) {
         // this.data = [
         //     {name: "Blue", value: 1},
         //     {name: "Ori", value: 2},
@@ -71,7 +71,7 @@ class D3PieChart {
         pies.append("path").attr("d", arc).attr("fill", d => {
             return color(d.value)
         }).on("mouseover", (event) => {
-            setCountry(`Country: ${event.target.__data__.data.name}, Cases/million: ${event.target.__data__.data.value}`)
+            setCountryData(event.target.__data__.data)
         })
 
     }
