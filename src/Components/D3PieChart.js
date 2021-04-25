@@ -41,7 +41,7 @@ class D3PieChart {
             return (d.value > d3.max(data, d => d.value) * 0.75)
         })
 
-        console.log("D3PieAfterFilter", data)
+        // console.log("D3PieAfterFilter", data)
 
         let svg = d3.select(element)
             .append("svg")
@@ -71,7 +71,7 @@ class D3PieChart {
         pies.append("path").attr("d", arc).attr("fill", d => {
             return color(d.value)
         }).on("mouseover", (event) => {
-            setCountry(event.target.__data__.data.name)
+            setCountry(`Country: ${event.target.__data__.data.name}, Cases/million: ${event.target.__data__.data.value}`)
         })
 
     }
