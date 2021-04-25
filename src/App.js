@@ -8,6 +8,7 @@ import ChartWrapper from "./Components/ChartWrapper";
 function App() {
 
     const [data, setData] = useState(null)
+    const [country, setCountry] = useState(null)
 
     useEffect(() => {
         csv("https://covid.ourworldindata.org/data/owid-covid-data.csv")
@@ -15,7 +16,12 @@ function App() {
 
                 let maxDate = (d) => max(d, d => d.date)
                 data = Array.from(group(data, d => d.iso_code), ([key, value]) => ({key, value}))
-                data = data.map(d => d.value).map(d => d.filter(e => e.date===maxDate(d))).map(d => d[0])
+                data = data.map(d => d.value)
+                    .map(d => d.filter(e => {
+                        return e.date === maxDate(d) && e.total_cases_per_million !== null && e.total_cases_per_million !== undefined
+                    }))
+                    .map(d => d[0])
+                console.log(data)
 
                 setData(data)
             })
@@ -26,11 +32,24 @@ function App() {
 
     return (
         <div className="App">
-            <TopHeader/>
 
-            <Segment compact margin>
-                <ChartWrapper data={data}/>
-            </Segment>
+            <Segment.Group>
+                <TopHeader/>
+                {
+                    data ?
+                        <Segment compact>
+                            <ChartWrapper data={data} setCountry={setCountry}/>
+                        </Segment>
+                        :
+                        <Segment vertical loading>
+                            <div style={
+                                {height: 500, width: 500}
+                            }/>
+                        </Segment>
+                }
+                {country}
+            </Segment.Group>
+
         </div>
     );
 }

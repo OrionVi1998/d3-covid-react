@@ -1,7 +1,7 @@
 import React, {useRef, useState, useEffect} from 'react';
 import D3PieChart from './D3PieChart'
 
-const ChartWrapper = ({ data }) => {
+const ChartWrapper = ({ data, setCountry }) => {
     const chartArea = useRef(null)
     const [chart, setChart] = useState(null)
 
@@ -9,7 +9,7 @@ const ChartWrapper = ({ data }) => {
     useEffect(() => {
 
         if (!chart) {
-            setChart(new D3PieChart(chartArea.current, data))
+            setChart(new D3PieChart(chartArea.current, data, setCountry))
         } else {
             chart.update()
         }

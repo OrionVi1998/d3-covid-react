@@ -16,25 +16,44 @@ const radius = Math.min(WIDTH, HEIGHT) / 2 - 50
 
 class D3PieChart {
 
-    constructor(element, data) {
+    constructor(element, data, setCountry) {
+        // this.data = [
+        //     {name: "Blue", value: 1},
+        //     {name: "Ori", value: 2},
+        //     {name: "HeHowShallNotBeNamed", value: 3},
+        //     {name: "Blue", value: 4},
+        //     {name: "Ori", value: 5},
+        //     {name: "HeHowShallNotBeNamed", value: 6}
+        // ]
+        // data.map(d => console.log(d))
 
-        this.data = data
-        this.data = [
-            {name: "Blue", value: 1},
-            {name: "Ori", value: 2},
-            {name: "HeHowShallNotBeNamed", value: 3},
-            {name: "Blue", value: 4},
-            {name: "Ori", value: 5},
-            {name: "HeHowShallNotBeNamed", value: 6}
-        ]
-        data = this.data
+        // console.log("D3Pie", data)
+
+
+        data = data.map(d => {
+            return {
+                name: d.iso_code,
+                value: d.total_cases_per_million
+            }
+        })
+
+        data = data.filter(d => {
+            return (d.value > d3.max(data, d => d.value) * 0.75)
+        })
+
+        console.log("D3PieAfterFilter", data)
 
         let svg = d3.select(element)
             .append("svg")
             .attr("width", WIDTH)
             .attr("height", HEIGHT)
             .append("g")
-            .attr("transform", `translate(${WIDTH/2}, ${HEIGHT/2})`)
+            .attr("transform", `translate(${WIDTH / 2}, ${HEIGHT / 2})`)
+
+        data = data.sort((a, b) => {
+            console.log(a-b, a, b)
+            return (a.value - b.value)
+        })
 
         let color = d3.scaleOrdinal()
             .domain(data.map(d => d.value))
@@ -45,17 +64,19 @@ class D3PieChart {
             .outerRadius(radius)
 
         let pie = d3.pie()
-            .sort(null)
+            .sortValues(null)
             .value(d => d.value)
 
         let pies = svg.selectAll("arc").data(pie(data)).enter().append("g").attr("class", "arc")
-        pies.append("path").attr("d", arc).attr("fill", d => color(d.data.value))
+        pies.append("path").attr("d", arc).attr("fill", d => {
+            return color(d.value)
+        }).on("mouseover", (event) => {
+            setCountry(event.target.__data__.data.name)
+        })
 
     }
 
     update() {
-
-
 
         //JOIN
 
