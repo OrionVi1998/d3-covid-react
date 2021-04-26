@@ -8,12 +8,12 @@ function CountryDataTable({countryData}) {
             <Table.Body>
                 {
                     Object.keys(countryData).map(k => {
-                        if (countryData[k] !== "" && countryData[k] !== "0.0") {
+                        if (countryData[k] !== null) {
 
                             return (
                                 <Table.Row>
                                     <Table.Cell>{k.replace(new RegExp("_", "gm"), " ")}</Table.Cell>
-                                    <Table.Cell>{countryData[k]}</Table.Cell>
+                                    <Table.Cell>{countryData[k].toString()}</Table.Cell>
                                 </Table.Row>)
                         }
                     })

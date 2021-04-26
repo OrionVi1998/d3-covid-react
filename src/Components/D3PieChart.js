@@ -38,7 +38,7 @@ class D3PieChart {
         })
 
         data = data.filter(d => {
-            return (d.value > d3.max(data, d => d.value) * 0.75)
+            return (d.value > d3.max(data, d => d.value) * .45)
         })
 
         // console.log("D3PieAfterFilter", data)
