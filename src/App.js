@@ -2,14 +2,14 @@ import './App.css';
 import TopHeader from "./Components/TopHeader";
 import {useEffect, useState} from "react";
 import {csv, group, max} from "d3"
-import {Segment} from "semantic-ui-react";
+import {Grid, Header, Segment, Table} from "semantic-ui-react";
 import PieChartWrapper from "./Components/PieChartWrapper";
-import D3PieChart from "./Components/D3PieChart";
+import CountryDataTable from "./Components/CountryDataTable";
 
 function App() {
 
     const [data, setData] = useState(null)
-    const [countryData, setCountryData] = useState({name:"---",value:"---"})
+    const [countryData, setCountryData] = useState({})
 
     useEffect(() => {
         csv("https://covid.ourworldindata.org/data/owid-covid-data.csv")
@@ -19,14 +19,11 @@ function App() {
                 data = Array.from(group(data, d => d.iso_code), ([key, value]) => ({key, value}))
                 data = data.map(d => d.value)
                     .map(d => d.filter(e => {
-                        return e.date === maxDate(d) && e.total_cases_per_million !== null && e.total_cases_per_million !== undefined
+                        return e.date === maxDate(d) // && e.total_cases_per_million !== null && e.total_cases_per_million !== undefined
                     }))
                     .map(d => d[0])
-                console.log(data)
-
                 setData(data)
             })
-
             .catch(err => console.log(err))
 
     }, [])
@@ -39,16 +36,27 @@ function App() {
                 {
                     data ?
                         <Segment compact>
-                            <PieChartWrapper data={data} setCountryData={setCountryData}/>
+                            <Grid columns={2} divided>
+                                <Grid.Column>
+                                    <PieChartWrapper data={data} setCountryData={setCountryData}/>
+                                </Grid.Column>
+                                <Grid.Column>
+                                    <Header
+                                        content={`Country ${countryData.location}`}
+                                        subheader={"Hover over a section of the pie chart to see more data"}
+                                    />
+                                    <CountryDataTable countryData={countryData}/>
+                                </Grid.Column>
+                            </Grid>
+
                         </Segment>
                         :
-                        <Segment vertical loading>
+                        <Segment loading>
                             <div style={
                                 {height: 500, width: 500}
                             }/>
                         </Segment>
                 }
-                {`Country: ${countryData.name}, Cases/million: ${countryData.value}`}
             </Segment.Group>
 
         </div>

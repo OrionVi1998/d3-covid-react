@@ -51,7 +51,7 @@ class D3PieChart {
             .attr("transform", `translate(${WIDTH / 2}, ${HEIGHT / 2})`)
 
         data = data.sort((a, b) => {
-            console.log(a-b, a, b)
+            // console.log(a-b, a, b)
             return (a.value - b.value)
         })
 
