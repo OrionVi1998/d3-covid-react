@@ -2,14 +2,14 @@ import './App.css';
 import TopHeader from "./Components/TopHeader";
 import {useEffect, useState} from "react";
 import {csv, group, max, autoType} from "d3"
-import {Grid, Header, Segment} from "semantic-ui-react";
+import {Grid, Header, Segment, Pagination, Table} from "semantic-ui-react";
 import PieChartWrapper from "./Components/PieChartWrapper";
 import CountryDataTable from "./Components/CountryDataTable";
 
 function App() {
 
     const [data, setData] = useState(null)
-    const [countryData, setCountryData] = useState({})
+    const [countryData, setCountryData] = useState(null)
 
     useEffect(() => {
         csv("https://covid.ourworldindata.org/data/owid-covid-data.csv", autoType)
@@ -42,15 +42,8 @@ function App() {
                                 <Grid.Column>
                                     <PieChartWrapper data={data} setCountryData={setCountryData}/>
                                 </Grid.Column>
-                                <Grid.Column>
-                                    <Header
-                                        content={`Country ${countryData.location}`}
-                                        subheader={"Hover over a section of the pie chart to see more data"}
-                                    />
-                                    <CountryDataTable countryData={countryData}/>
-                                </Grid.Column>
+                                <CountryDataTable countryData={countryData}/>
                             </Grid>
-
                         </Segment>
                         :
                         <Segment loading>
@@ -60,7 +53,6 @@ function App() {
                         </Segment>
                 }
             </Segment.Group>
-
         </div>
     );
 }
