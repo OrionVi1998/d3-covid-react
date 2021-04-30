@@ -70,7 +70,7 @@ class D3PieChart {
         let pies = svg.selectAll("arc").data(pie(data)).enter().append("g").attr("class", "arc")
         pies.append("path").attr("d", arc).attr("fill", d => {
             return color(d.value)
-        }).on("mouseover", (event) => {
+        }).on("click", (event) => {
             setCountryData(event.target.__data__.data)
         })
 

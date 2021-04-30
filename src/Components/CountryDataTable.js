@@ -5,7 +5,7 @@ function CountryDataTable({countryData}) {
 
     const [currentPage, setPage] = useState(1)
     const [totalRows, setTotalRows] = useState([])
-    const [resultsToDisplay, setResultsToDisplay] = useState(3)
+    const [totalPages, setTotalPages] = useState(3)
 
     useEffect(() => {
 
@@ -17,13 +17,16 @@ function CountryDataTable({countryData}) {
                         if (countryData[k] !== null) {
                             return (
                                 <Table.Row>
-                                    <Table.Cell>{k.replace(new RegExp("_", "gm"), " ")}</Table.Cell>
+                                    <Table.Cell style={{width: "300px"}}
+                                    >{k.replace(new RegExp("_", "gm"), " ")}</Table.Cell>
                                     <Table.Cell>{countryData[k].toString()}</Table.Cell>
                                 </Table.Row>)
+                        } else {
+                            return undefined
                         }
                     }).filter((row) => row !== undefined)
                 )
-                setResultsToDisplay(Math.round(totalRows.length / 3))
+                setTotalPages(Math.round(totalRows.length / 10))
                 break;
 
             case null:
@@ -43,15 +46,18 @@ function CountryDataTable({countryData}) {
                     <Table.Body>
                         {
                             totalRows.slice(
-                                resultsToDisplay * (currentPage - 1), resultsToDisplay * currentPage
+                                (currentPage - 1) * totalRows.length/totalPages,
+                                totalRows.length/totalPages * currentPage
                             ).map((row) => row)
                         }
                     </Table.Body>
                 </Table>
-                <Pagination onPageChange={(event) => {
-                    console.log(event)
-                    setPage(Number(event.target.outerText))
-                }} activePage={currentPage} totalPages={3}/>
+                <Pagination
+                    onPageChange={(event, data) => {
+                        console.log(countryData)
+                        setPage(data.activePage)
+                    }}
+                    activePage={currentPage} totalPages={totalPages}/>
             </Grid.Column>)
             :
             (<Grid.Column>

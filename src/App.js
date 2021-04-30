@@ -2,7 +2,7 @@ import './App.css';
 import TopHeader from "./Components/TopHeader";
 import {useEffect, useState} from "react";
 import {csv, group, max, autoType} from "d3"
-import {Grid, Header, Segment, Pagination, Table} from "semantic-ui-react";
+import {Grid, Segment} from "semantic-ui-react";
 import PieChartWrapper from "./Components/PieChartWrapper";
 import CountryDataTable from "./Components/CountryDataTable";
 
@@ -37,7 +37,7 @@ function App() {
                 <TopHeader/>
                 {
                     data ?
-                        <Segment compact>
+                        <Segment compact style={{height: 700}}>
                             <Grid columns={2} divided>
                                 <Grid.Column>
                                     <PieChartWrapper data={data} setCountryData={setCountryData}/>

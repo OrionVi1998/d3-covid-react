@@ -5,7 +5,7 @@ function TopHeader() {
 
     return (
         <Segment inverted>
-            <h1>Covid D3 Test</h1>
+            <h1>Covid D3</h1>
         </Segment>
     )
 }
