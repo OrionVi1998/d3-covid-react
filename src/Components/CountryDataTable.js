@@ -7,6 +7,12 @@ function CountryDataTable({countryData}) {
     const [totalRows, setTotalRows] = useState([])
     const [totalPages, setTotalPages] = useState(3)
 
+    function paginate(array, page_size, page_number) {
+        // human-readable page numbers usually start with 1, so we reduce 1 in the first argument
+        return array.slice((page_number - 1) * page_size, page_number * page_size);
+    }
+
+
     useEffect(() => {
 
         switch (countryData) {
@@ -26,7 +32,9 @@ function CountryDataTable({countryData}) {
                         }
                     }).filter((row) => row !== undefined)
                 )
+
                 setTotalPages(Math.round(totalRows.length / 10))
+
                 break;
 
             case null:
@@ -45,10 +53,7 @@ function CountryDataTable({countryData}) {
                 <Table definition size={"small"}>
                     <Table.Body>
                         {
-                            totalRows.slice(
-                                (currentPage - 1) * totalRows.length/totalPages,
-                                totalRows.length/totalPages * currentPage
-                            ).map((row) => row)
+                            paginate(totalRows, 10, currentPage).map((row) => row)
                         }
                     </Table.Body>
                 </Table>
