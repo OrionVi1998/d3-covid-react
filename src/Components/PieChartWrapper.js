@@ -1,5 +1,6 @@
 import React, {useRef, useState, useEffect} from 'react';
 import D3PieChart from './D3PieChart'
+import D3PieChartNewMethod from './D3PieChartNewMethod'
 
 const PieChartWrapper = ({data, setCountryData}) => {
     const chartArea = useRef(null)
@@ -21,7 +22,8 @@ const PieChartWrapper = ({data, setCountryData}) => {
 
 
         if (!chart) {
-            setChart(new D3PieChart(chartArea.current, data, setSelectedCountry))
+            // setChart(new D3PieChart(chartArea.current, data, setSelectedCountry))
+            setChart(new D3PieChartNewMethod(chartArea.current, data, setSelectedCountry))
         } else {
             chart.update(data)
         }

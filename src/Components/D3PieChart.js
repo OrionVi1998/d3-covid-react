@@ -83,11 +83,8 @@ class D3PieChart {
     update(data) {
 
         //JOIN
-
         //EXIT
-
         //UPDATE
-
         //ENTER
 
     }
