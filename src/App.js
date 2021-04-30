@@ -8,7 +8,8 @@ import CountryDataTable from "./Components/CountryDataTable";
 
 function App() {
 
-    const [data, setData] = useState(null)
+    const [allData, setAllData] = useState([])
+    const [latestData, setLatestData] = useState(null)
     const [countryData, setCountryData] = useState(null)
 
     useEffect(() => {
@@ -17,14 +18,18 @@ function App() {
                 let maxDate = (d) => max(d, d => d.date)
                 data = Array.from(group(data, d => d.iso_code), ([key, value]) => ({key, value}))
 
-                data = data.map(d => d.value)
+                let totalData = data.map(d => d.value)
+                setAllData(totalData)
+
+                data = totalData
                     .map(d => d.filter(e => {
                         return e.date === maxDate(d) // && e.total_cases_per_million !== null && e.total_cases_per_million !== undefined
                     }))
                     .map(d => {
                         return d[0]
                     })
-                setData(data)
+
+                setLatestData(data)
             })
             .catch(err => console.log(err))
 
@@ -36,11 +41,13 @@ function App() {
             <Segment.Group>
                 <TopHeader/>
                 {
-                    data ?
-                        <Segment compact style={{height: 700}}>
+                    latestData ?
+                        <Segment compact style={{height: "89vh"}}>
                             <Grid columns={2} divided>
                                 <Grid.Column>
-                                    <PieChartWrapper data={data} setCountryData={setCountryData}/>
+                                    <Segment>
+                                        <PieChartWrapper data={latestData} setCountryData={setCountryData}/>
+                                    </Segment>
                                 </Grid.Column>
                                 <CountryDataTable countryData={countryData}/>
                             </Grid>

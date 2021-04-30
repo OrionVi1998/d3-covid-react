@@ -59,7 +59,6 @@ function CountryDataTable({countryData}) {
                 </Table>
                 <Pagination
                     onPageChange={(event, data) => {
-                        console.log(countryData)
                         setPage(data.activePage)
                     }}
                     activePage={currentPage} totalPages={totalPages}/>

@@ -67,16 +67,20 @@ class D3PieChart {
             .sortValues(null)
             .value(d => d.value)
 
-        let pies = svg.selectAll("arc").data(pie(data)).enter().append("g").attr("class", "arc")
-        pies.append("path").attr("d", arc).attr("fill", d => {
-            return color(d.value)
-        }).on("click", (event) => {
-            setCountryData(event.target.__data__.data)
-        })
+        let pies = svg.selectAll("arc")
+            .data(pie(data)).enter().append("g")
+            .attr("class", "arc")
+
+        pies.append("path")
+            .attr("d", arc)
+            .attr("fill", d => color(d.value))
+            .on("click", (event, data) => {
+                setCountryData(data.data)
+            })
 
     }
 
-    update() {
+    update(data) {
 
         //JOIN
 

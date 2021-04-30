@@ -23,7 +23,7 @@ const PieChartWrapper = ({data, setCountryData}) => {
         if (!chart) {
             setChart(new D3PieChart(chartArea.current, data, setSelectedCountry))
         } else {
-            chart.update()
+            chart.update(data)
         }
 
     }, [chart, data, setCountryData])
