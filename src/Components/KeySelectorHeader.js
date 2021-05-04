@@ -51,9 +51,9 @@ function KeySelectorHeader({ chartKey, setChartKey, chartPercentage, setChartPer
                 <Grid.Column textAlign={"left"}>
                     <Input
                         min={1}
-                        max={100}
-                        onChange={(event, data) => {
-                            setChartPercentage(data.value)
+                        max={80}
+                        onChange={(event, { value }) => {
+                            setChartPercentage(value)
                         }}
                         type='range'
                         value={chartPercentage}

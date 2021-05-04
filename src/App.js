@@ -73,10 +73,8 @@ function App() {
                             </Grid>
                         </Segment>
                         :
-                        <Segment loading>
-                            <div style={
-                                {height: 500, width: 500}
-                            }/>
+                        <Segment loading style={{height: "82vh"}}>
+
                         </Segment>
                 }
             </Segment.Group>
