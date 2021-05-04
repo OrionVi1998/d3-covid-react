@@ -12,12 +12,12 @@ MARGIN.YDELTA = MARGIN.TOP + MARGIN.BOTTOM
 
 const WIDTH = 500
 const HEIGHT = 500
-const radius = Math.min(WIDTH, HEIGHT) / 2 - 50
+const RADIUS = Math.min(WIDTH, HEIGHT) / 2 - 50
 
 
 class D3PieChart {
 
-    constructor(element, data, setCountryData) {
+    constructor(element, data, setCountryData, chartPercentage) {
 
         this.setCountryData = setCountryData
 
@@ -36,28 +36,15 @@ class D3PieChart {
             .innerRadius(0)
             .outerRadius(Math.min(WIDTH, HEIGHT) / 2 - 1)
 
-        this.update(data)
+        this.update(data, chartPercentage)
 
     }
 
-    update(data) {
-
-        data = data.map(d => {
-            return {
-                name: d.iso_code,
-                value: d.total_cases_per_million
-            }
-        })
+    update(data, chartPercentage) {
 
         data = data.filter(d => {
-            return (d.value > d3.max(data, d => d.value) * .45)
+            return (d.value > d3.max(data, d => d.value) * chartPercentage /100)
         })
-
-        data = data.sort((a, b) => {
-            // console.log(a-b, a, b)
-            return (a.value - b.value)
-        })
-
 
         this.arcs = this.pie(data)
 
@@ -69,16 +56,22 @@ class D3PieChart {
             .attr("stroke", "white")
             .selectAll("path")
             .data(this.arcs)
-            .join("path")
-            .attr("fill", d => this.color(d.value))
-            .on("click", (event, data) => {
-                this.setCountryData(data.data)
-            })
-            .attr("d", this.arc)
-            .append("title")
-            .text(d => {
-                return `${d.data.name}: ${Math.round(d.data.value).toLocaleString()}`
-            })
+            .join(
+                enter => {
+                    enter.append("path")
+                        .attr("fill", d => this.color(d.value))
+                        .on("click", (event, data) => {
+                            this.setCountryData(data.data)
+                        })
+                        .attr("d", this.arc)
+                        .append("title")
+                        .text(d => {
+                            return `${d.data.name}: ${Math.round(d.data.value).toLocaleString()}`
+                        })
+                },
+                update => update,
+                exit => exit.remove())
+
 
         let arcLabel = (d) => {
             const radius = Math.min(WIDTH, HEIGHT) / 2 * 0.8;
@@ -91,17 +84,22 @@ class D3PieChart {
             .attr("text-anchor", "middle")
             .selectAll("text")
             .data(this.arcs)
-            .join("text")
-            .attr("transform", d => `translate(${arcLabel(d)})`)
-            .call(text => text.append("tspan")
-                .attr("y", "-0.4em")
-                .attr("font-weight", "bold")
-                .text(d => d.data.name))
-            .call(text => text.filter(d => (d.endAngle - d.startAngle) > 0.25).append("tspan")
-                .attr("x", 0)
-                .attr("y", "0.7em")
-                .attr("fill-opacity", 0.7)
-                .text(d => d.data.value.toLocaleString()));
+            .join(enter => {
+                    enter.append("text")
+                        .attr("transform", d => `translate(${arcLabel(d)})`)
+                        .call(text => text.filter(d => (d.endAngle - d.startAngle) > 0.10).append("tspan")
+                            .attr("y", "-0.4em")
+                            .attr("font-weight", "bold")
+                            .text(d => d.data.name))
+                        .call(text => text.filter(d => (d.endAngle - d.startAngle) > 0.25).append("tspan")
+                            .attr("x", 0)
+                            .attr("y", "0.7em")
+                            .attr("fill-opacity", 0.7)
+                            .text(d => d.data.value.toLocaleString()))
+                },
+                update => update,
+                exit => exit.remove()
+            )
 
     }
 }

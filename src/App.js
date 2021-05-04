@@ -5,12 +5,15 @@ import {csv, group, max, autoType} from "d3"
 import {Grid, Segment} from "semantic-ui-react";
 import PieChartWrapper from "./Components/PieChartWrapper";
 import CountryDataTable from "./Components/CountryDataTable";
+import KeySelectorHeader from "./Components/KeySelectorHeader";
 
 function App() {
 
     const [allData, setAllData] = useState([])
     const [latestData, setLatestData] = useState(null)
     const [countryData, setCountryData] = useState(null)
+    const [chartKey, setChartKey] = useState("total_cases_per_million")
+    const [chartPercentage, setChartPercentage] = useState(45)
 
     useEffect(() => {
         csv("https://covid.ourworldindata.org/data/owid-covid-data.csv", autoType)
@@ -29,11 +32,19 @@ function App() {
                         return d[0]
                     })
 
+                data = data.filter(e =>
+                    !e.iso_code.startsWith("OWID")
+                )
+
                 setLatestData(data)
             })
             .catch(err => console.log(err))
 
     }, [])
+
+    useEffect(() => setChartPercentage(45), [chartKey])
+
+
 
     return (
         <div className="App">
@@ -42,11 +53,20 @@ function App() {
                 <TopHeader/>
                 {
                     latestData ?
-                        <Segment compact style={{height: "89vh"}}>
+                        <Segment compact style={{height: "82vh"}}>
+                            <KeySelectorHeader chartKey={chartKey}
+                                               setChartKey={setChartKey}
+                                               chartPercentage={chartPercentage}
+                                               setChartPercentage={setChartPercentage}/>
                             <Grid columns={2} divided>
                                 <Grid.Column>
                                     <Segment>
-                                        <PieChartWrapper data={latestData} setCountryData={setCountryData}/>
+                                        <PieChartWrapper
+                                            data={latestData}
+                                            setCountryData={setCountryData}
+                                            chartKey={chartKey}
+                                            chartPercentage={chartPercentage}
+                                        />
                                     </Segment>
                                 </Grid.Column>
                                 <CountryDataTable countryData={countryData}/>

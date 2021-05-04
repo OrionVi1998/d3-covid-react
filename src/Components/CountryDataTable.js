@@ -49,7 +49,7 @@ function CountryDataTable({countryData}) {
             (<Grid.Column>
                 <Header
                     content={`Country: ${countryData.location}`}
-                    subheader={"Hover over a section of the pie chart to see more data"}/>
+                    subheader={"Click a section of the pie chart to see more data on the specific country"}/>
                 <Table definition size={"small"}>
                     <Table.Body>
                         {
