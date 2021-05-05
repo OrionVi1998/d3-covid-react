@@ -53,12 +53,12 @@ function App() {
                 <TopHeader/>
                 {
                     latestData ?
-                        <Segment compact style={{height: "82vh"}}>
+                        <Segment compact style={{height: "100%"}}>
                             <KeySelectorHeader chartKey={chartKey}
                                                setChartKey={setChartKey}
                                                chartPercentage={chartPercentage}
                                                setChartPercentage={setChartPercentage}/>
-                            <Grid columns={2} divided>
+                            <Grid columns={2} rows={2} divided>
                                 <Grid.Column>
                                     <Segment>
                                         <PieChartWrapper
@@ -73,9 +73,8 @@ function App() {
                             </Grid>
                         </Segment>
                         :
-                        <Segment loading style={{height: "82vh"}}>
+                        <Segment loading style={{height: "92vh"}}/>
 
-                        </Segment>
                 }
             </Segment.Group>
         </div>

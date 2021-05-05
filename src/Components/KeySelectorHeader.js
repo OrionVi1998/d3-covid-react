@@ -30,7 +30,7 @@ function KeySelectorHeader({ chartKey, setChartKey, chartPercentage, setChartPer
     ]
 
     return (
-        <Segment>
+        <Segment select style={{height: "7vh"}}>
             <Grid columns={3} rows={1} verticalAlign={"middle"}>
                 <Grid.Column>
                     <Dropdown
