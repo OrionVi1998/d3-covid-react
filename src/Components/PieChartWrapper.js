@@ -17,7 +17,7 @@ const PieChartWrapper = ({data, setCountryData, chartKey, chartPercentage}) => {
             setCountryData(countryData)
         }
 
-        console.log(data)
+        // console.log(data)
 
         let formattedData = data.map(d => {
             return {

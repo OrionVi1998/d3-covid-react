@@ -22,7 +22,7 @@ function CountryDataTable({countryData}) {
                     Object.keys(countryData).map(k => {
                         if (countryData[k] !== null) {
                             return (
-                                <Table.Row>
+                                <Table.Row key={k}>
                                     <Table.Cell style={{width: "300px"}}
                                     >{k.replace(new RegExp("_", "gm"), " ")}</Table.Cell>
                                     <Table.Cell>{countryData[k].toString()}</Table.Cell>

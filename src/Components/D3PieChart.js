@@ -12,7 +12,6 @@ MARGIN.YDELTA = MARGIN.TOP + MARGIN.BOTTOM
 
 const WIDTH = 500
 const HEIGHT = 500
-const RADIUS = Math.min(WIDTH, HEIGHT) / 2 - 50
 
 
 class D3PieChart {
