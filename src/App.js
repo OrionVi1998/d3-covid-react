@@ -62,7 +62,7 @@ function App() {
         if (latestData) {
             if (!timedData) {
                 return (
-                    <Segment placeholder>
+                    <Segment placeholder style={{height:"26vh"}}>
                         <Header.Subheader>
                             Select a country to see a date visualization of the selected field
                         </Header.Subheader>
@@ -70,7 +70,7 @@ function App() {
                 )
             } else {
                 return (
-                    <Segment>
+                    <Segment style={{height:"26vh"}}>
                         <LineChartWrapper data={timedData} chartKey={chartKey}/>
                     </Segment>
                 )
