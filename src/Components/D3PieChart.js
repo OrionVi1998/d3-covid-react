@@ -40,10 +40,15 @@ class D3PieChart {
     }
 
     update(data, chartPercentage) {
+        let topTwo = [data[data.length -2], data[data.length - 1]]
 
         data = data.filter(d => {
             return (d.value > d3.max(data, d => d.value) * chartPercentage /100)
         })
+
+        if (data.length === 1) {
+            data = topTwo
+        }
 
         this.arcs = this.pie(data)
 
