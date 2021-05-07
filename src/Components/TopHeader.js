@@ -4,9 +4,18 @@ import {Header, Button, Icon, Menu} from "semantic-ui-react";
 function TopHeader() {
 
     return (
-        <Menu inverted style={{height:"5vh"}}>
+        <Menu inverted style={{height:"6vh"}}>
             <Menu.Item position={"left"}>
-                <Header as={"h1"} inverted>Covid D3</Header>
+                <Header as={"h1"} inverted>
+                    Covid D3
+                </Header>
+            </Menu.Item>
+            <Menu.Item>
+                <Header.Subheader>
+                    A lot of thanks to
+                    <a href="https://ourworldindata.org/coronavirus-source-data"> Our World In Data
+                    </a> for providing the dataset
+                </Header.Subheader>
             </Menu.Item>
             <Menu.Item position="right">
                 <Button

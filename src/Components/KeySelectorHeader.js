@@ -39,7 +39,7 @@ function KeySelectorHeader({ chartKey, setChartKey, chartPercentage, setChartPer
                 </Grid.Column>
                 <Grid.Column textAlign={"left"}>
                     <Dropdown
-                        placeholder='Select the variable to see'
+                        placeholder={`Total Deaths Per Million`}
                         fluid
                         selection
                         options={dropdownChoices}
