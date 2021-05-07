@@ -21,6 +21,7 @@ class D3LineChart {
             .append("svg")
             .attr("width", WIDTH)
             .attr("height", HEIGHT)
+            .append("g")
 
 
 
@@ -84,6 +85,8 @@ class D3LineChart {
 
         this.svg.append("g")
             .call(this.yAxis);
+
+        //TODO: Axis are overlapping and not getting removed.
 
 
     }
