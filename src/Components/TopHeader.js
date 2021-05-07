@@ -1,12 +1,23 @@
 import React from 'react'
-import {Segment} from "semantic-ui-react";
+import {Segment, Header, Button, Icon, Menu} from "semantic-ui-react";
 
 function TopHeader() {
 
     return (
-        <Segment inverted style={{height:"7vh"}}>
-            <h1>Covid D3</h1>
-        </Segment>
+        <Menu inverted style={{height:"7vh"}}>
+            <Menu.Item position={"left"}>
+                <Header as={"h1"} inverted>Covid D3</Header>
+            </Menu.Item>
+            <Menu.Item position="right">
+                <Button
+                    inverted
+                    color={"grey"}
+                    floated={"right"}
+                    onClick={() => {window.open("https://github.com/OrionVi1998/d3-covid-react")}}>
+                    <Icon name={"github"}/> GitHub
+                </Button>
+            </Menu.Item>
+        </Menu>
     )
 }
 
