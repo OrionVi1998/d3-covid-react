@@ -100,6 +100,9 @@ class D3PieChart {
                             .attr("y", "0.7em")
                             .attr("fill-opacity", 0.7)
                             .text(d => d.data.value.toLocaleString()))
+                        .on("click", (event, data) => {
+                            this.setCountryData(data.data)
+                        })
                 },
                 update => update,
                 exit => exit.remove()
