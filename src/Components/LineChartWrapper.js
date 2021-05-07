@@ -8,8 +8,8 @@ const LineChartWrapper = ({ data, chartKey }) => {
 
 
     useEffect(() => {
-
-        console.log(data[0].date.toUTCString())
+        //
+        // console.log(data[0].date.toUTCString())
 
         let formattedData = data.map(d => {
             return {
