@@ -31,8 +31,13 @@ function KeySelectorHeader({ chartKey, setChartKey, chartPercentage, setChartPer
 
     return (
         <Segment select style={{height: "7vh"}}>
-            <Grid columns={3} rows={1} verticalAlign={"middle"}>
-                <Grid.Column>
+            <Grid columns={4} rows={1} verticalAlign={"middle"}>
+                <Grid.Column textAlign={"right"}>
+                    <Label basic pointing='right'>
+                        Select the data you would like to see
+                    </Label>
+                </Grid.Column>
+                <Grid.Column textAlign={"left"}>
                     <Dropdown
                         placeholder='Select the variable to see'
                         fluid

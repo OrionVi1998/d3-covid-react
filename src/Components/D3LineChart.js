@@ -22,9 +22,6 @@ class D3LineChart {
             .attr("width", WIDTH)
             .attr("height", HEIGHT)
 
-
-
-
         this.x = d3.scaleUtc()
             .domain(d3.extent(data, d => d.date))
             .range([MARGIN.LEFT, WIDTH - MARGIN.RIGHT])
@@ -41,8 +38,8 @@ class D3LineChart {
             .y(d => this.y(d.value))
 
         this.mainG = this.svg.append("g")
-        this.xax = this.svg.append("g")
-        this.yax = this.svg.append("g")
+        this.xAxisGroup = this.svg.append("g")
+        this.yAxisGroup = this.svg.append("g")
 
         this.update(data)
 
@@ -70,10 +67,10 @@ class D3LineChart {
             .attr("transform", `translate(0,${HEIGHT - MARGIN.BOTTOM})`)
             .call(d3.axisBottom(this.x).ticks(WIDTH / 80).tickSizeOuter(0))
 
-        this.xax
+        this.xAxisGroup
             .call(this.xAxis);
 
-        this.yax
+        this.yAxisGroup
             .call(this.yAxis);
 
 

@@ -41,7 +41,9 @@ function App() {
 
     }, [])
 
-    useEffect(() => setChartPercentage(45), [chartKey])
+    useEffect(() => {
+        setChartPercentage(45)
+    }, [chartKey])
 
     useEffect(() => {
 
@@ -51,6 +53,8 @@ function App() {
         // console.log(timedData)
 
     }, [allData, countryData, timedData])
+
+
 
 
     function renderLineViz() {
