@@ -1,10 +1,10 @@
 import React from 'react'
-import {Segment, Header, Button, Icon, Menu} from "semantic-ui-react";
+import {Header, Button, Icon, Menu} from "semantic-ui-react";
 
 function TopHeader() {
 
     return (
-        <Menu inverted style={{height:"7vh"}}>
+        <Menu inverted style={{height:"5vh"}}>
             <Menu.Item position={"left"}>
                 <Header as={"h1"} inverted>Covid D3</Header>
             </Menu.Item>
