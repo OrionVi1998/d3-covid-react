@@ -1,6 +1,7 @@
 {
   "short_name": "Covid Data Viz",
   "name": "Covid Data Visualization by OrionVi1998",
+  "description": "Covid data visualization using D3 and React. Data provided by our would in data.",
   "icons": [
     {
       "src": "favicon.ico",
